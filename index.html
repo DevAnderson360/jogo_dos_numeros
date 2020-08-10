@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Jogo dos números</title>
+
+	<!--link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css"-->
+
+	<!--stilo-->
+	<style>
+		
+		*{
+			--color-border-container: #1B1B1E ;
+		}
+
+		html, body {
+		  height: 100%;
+		  min-height: 100%;
+		}
+
+		.container{
+			height: 100%;
+			min-height: 100%;
+			display: -webkit-flex;
+			display: flex;
+			-webkit-align-items: center;
+			align-items: center;
+			-webkit-justify-content: center;
+			justify-content: center;
+		}
+
+		.blockF{
+			display: inline-block;
+			margin: 10px;
+			padding: 5px;
+			
+			align-items: center;
+			justify-content: center;
+
+			max-width: 500px;
+
+			border: 1px solid var(--color-border-container);
+			border-radius: 2px;
+		}
+
+		.blockChild{
+			display: inline-block;
+			width: 10vw;
+			height: 10vh;
+			margin: 10px;
+			padding: 5px;
+
+			border: 1px solid var(--color-border-container);
+			border-radius: 2px;
+		}
+
+		.blockChildn{
+			display: inline-block;
+			width: 10vw;
+			height: 10vh;
+			margin: 10px;
+			padding: 5px;
+
+			border: 1px solid var(--color-border-container);
+			border-radius: 2px;
+		}
+
+		.blockChild:hover{
+            cursor:pointer;
+        }
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="blockF" style="direction: ">
+			<div class="blockChild" key="0">0</div>
+			<div class="blockChild" key="1">1</div>
+			<div class="blockChild" key="2">2</div>
+			<div class="blockChild" key="3">3</div>
+			<div class="blockChild" key="4">4</div>
+			<div class="blockChild" key="5">5</div>
+			<div class="blockChild" key="6">6</div>
+			<div class="blockChild" key="7">7</div>
+			<div class="blockChild" key="8">8</div>
+			<div class="blockChild" key="9">9</div>
+		</div>	
+		<div class="blockF">
+			<div class="blockChildn" key="0">Zero</div>
+			<div class="blockChildn" key="1">Um</div>
+			<div class="blockChildn" key="2">Dois</div>
+			<div class="blockChildn" key="3">Três</div>
+			<div class="blockChildn" key="4">Quatro</div>
+			<div class="blockChildn" key="5">Cinco</div>
+			<div class="blockChildn" key="6">Seis</div>
+			<div class="blockChildn" key="7">Sete</div>
+			<div class="blockChildn" key="8">Oito</div>
+			<div class="blockChildn" key="9">Nove</div>
+		</div>	
+	</div>
+	<!--footer-->
+	<script src="node_modules/jquery/dist/jquery.min.js"></script>
+	<script src="node_modules/components-jqueryui/jquery-ui.min.js"></script>
+	<!--script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script-->
+
+	<script>
+		$(document).ready(function(){
+
+			let pontos = 0;
+
+			$('.blockChild').draggable({
+				helper: 'clone'
+			});
+
+			// Lixeira
+		    $('.blockChildn').droppable({
+		        //hoverClass: 'lixeira-ativa',
+		        drop: function(e, ui) {
+
+		            let this_num = $(this).attr('key');
+
+		            let   ui_num = $(ui)[0].draggable.attr('key')
+
+		            let msg = "Acertou"; 
+
+		            let status = this_num === ui_num ? true: false;
+
+		            if(!status)
+		            	msg = "Errou"
+		            
+		            console.log(msg)
+
+		            if(status){
+		            	$(this).droppable( "option", "disabled", true );
+		            	$(this).css("background-color", "#cecece");
+
+		            	pontos = pontos + 1;
+		            }
+
+		            console.log(pontos)
+
+		        }
+		    })
+
+		});
+	</script>
+</body>
+</html>
