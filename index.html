@@ -7,12 +7,14 @@
 	<title>Jogo dos números</title>
 
 	<!--link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css"-->
+	<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 
 	<!--stilo-->
 	<style>
 		
 		*{
-			--color-border-container: #1B1B1E ;
+			--color-border-container: #1B1B1E;
+			--color-card-body: #E0FAE4;
 		}
 
 		html, body {
@@ -29,6 +31,7 @@
 			align-items: center;
 			-webkit-justify-content: center;
 			justify-content: center;
+
 		}
 
 		.blockF{
@@ -41,31 +44,57 @@
 
 			max-width: 500px;
 
-			border: 1px solid var(--color-border-container);
-			border-radius: 2px;
+			background: #A5B8A8;
+
+			-webkit-box-shadow: 6px 6px 12px -5px rgba(87,97,89,1);
+			-moz-box-shadow: 6px 6px 12px -5px rgba(87,97,89,1);
+			box-shadow: 6px 6px 12px -5px rgba(87,97,89,1);
+
+
 		}
 
 		.blockChild{
 			display: inline-block;
-			width: 10vw;
+			width: 5vw;
 			height: 10vh;
 			margin: 10px;
 			padding: 5px;
 
-			border: 1px solid var(--color-border-container);
-			border-radius: 2px;
+			/*border: 1px solid var(--color-border-container);*/
+			border-radius: 5px;
+
+			background: var(--color-card-body);
+
+			-webkit-box-shadow: 6px 6px 12px -5px rgba(87,97,89,1);
+			-moz-box-shadow: 6px 6px 12px -5px rgba(87,97,89,1);
+			box-shadow: 6px 6px 12px -5px rgba(87,97,89,1);
+
+
+		}
+
+		.blockChild, .blockChildn div{
+			font-size: 1.6rem;
+			font-family: 'Poppins', sans-serif;
 		}
 
 		.blockChildn{
 			display: inline-block;
-			width: 10vw;
+			width: 8vw;
 			height: 10vh;
 			margin: 10px;
 			padding: 5px;
 
-			border: 1px solid var(--color-border-container);
+			/*border: 1px solid var(--color-border-container);*/
 			border-radius: 2px;
+
+			background: var(--color-card-body);
+
+			-webkit-box-shadow: 6px 6px 12px -5px rgba(87,97,89,1);
+			-moz-box-shadow: 6px 6px 12px -5px rgba(87,97,89,1);
+			 box-shadow: 6px 6px 12px -5px rgba(87,97,89,1);
 		}
+
+		
 
 		.blockChild:hover{
             cursor:pointer;
@@ -74,29 +103,114 @@
 </head>
 <body>
 	<div class="container">
-		<div class="blockF" style="direction: ">
-			<div class="blockChild" key="0">0</div>
-			<div class="blockChild" key="1">1</div>
-			<div class="blockChild" key="2">2</div>
-			<div class="blockChild" key="3">3</div>
-			<div class="blockChild" key="4">4</div>
-			<div class="blockChild" key="5">5</div>
-			<div class="blockChild" key="6">6</div>
-			<div class="blockChild" key="7">7</div>
-			<div class="blockChild" key="8">8</div>
-			<div class="blockChild" key="9">9</div>
-		</div>	
+		<div id="painel" style="display: inline;">
+			<div>Total pontos: <strong id="tp">1</strong> </div>
+			<div>Erros: <strong id="err">5</strong></div>
+		</div>
 		<div class="blockF">
-			<div class="blockChildn" key="0">Zero</div>
-			<div class="blockChildn" key="1">Um</div>
-			<div class="blockChildn" key="2">Dois</div>
-			<div class="blockChildn" key="3">Três</div>
-			<div class="blockChildn" key="4">Quatro</div>
-			<div class="blockChildn" key="5">Cinco</div>
-			<div class="blockChildn" key="6">Seis</div>
-			<div class="blockChildn" key="7">Sete</div>
-			<div class="blockChildn" key="8">Oito</div>
-			<div class="blockChildn" key="9">Nove</div>
+			<div class="blockChild" key="0">
+				<div class="container">
+					0
+				</div>
+			</div>
+			<div class="blockChild" key="1">
+				<div class="container">
+					1
+				</div>
+			</div>
+			<div class="blockChild" key="2">
+				<div class="container">
+					2
+				</div>
+			</div>
+			<div class="blockChild" key="3">
+				<div class="container">
+					3
+				</div>
+			</div>
+			<div class="blockChild" key="4">
+				<div class="container">
+					4
+				</div>
+			</div>
+			<div class="blockChild" key="5">
+				<div class="container">
+					5
+				</div>
+			</div>
+			<div class="blockChild" key="6">
+				<div class="container">
+					6
+				</div>
+			</div>
+			<div class="blockChild" key="7">
+				<div class="container">
+					7
+				</div>
+			</div>
+			<div class="blockChild" key="8">
+				<div class="container">
+					8
+				</div>
+			</div>
+			<div class="blockChild" key="9">
+				<div class="container">
+					9
+				</div>
+			</div>
+		</div>
+
+		<div class="blockF">
+			<div class="blockChildn" key="0">
+				<div class="container">
+					Zero
+				</div>
+			</div>
+			<div class="blockChildn" key="1">
+				<div class="container">
+					Um
+				</div>
+			</div>
+			<div class="blockChildn" key="2">
+				<div class="container">
+					Dois
+				</div>
+			</div>
+			<div class="blockChildn" key="3">
+				<div class="container">
+					Três
+				</div>
+			</div>
+			<div class="blockChildn" key="4">
+				<div class="container">
+					Quatro
+				</div>
+			</div>
+			<div class="blockChildn" key="5">
+				<div class="container">
+					Cinco
+				</div>
+			</div>
+			<div class="blockChildn" key="6">
+				<div class="container">
+					Seis
+				</div>
+			</div>
+			<div class="blockChildn" key="7">
+				<div class="container">
+					Sete
+				</div>
+			</div>
+			<div class="blockChildn" key="8">
+				<div class="container">
+					Oito
+				</div>
+			</div>
+			<div class="blockChildn" key="9">
+				<div class="container">
+					Nove
+				</div>
+			</div>
 		</div>	
 	</div>
 	<!--footer-->
@@ -108,10 +222,21 @@
 		$(document).ready(function(){
 
 			let pontos = 0;
+			let erros  = 0;
 
 			$('.blockChild').draggable({
 				helper: 'clone'
 			});
+
+			function setPontos()
+			{
+				$("#tp").text(pontos);
+			}
+
+			function setErros()
+			{
+				$("#err").text(erros);
+			}
 
 			// Lixeira
 		    $('.blockChildn').droppable({
@@ -133,15 +258,22 @@
 
 		            if(status){
 		            	$(this).droppable( "option", "disabled", true );
-		            	$(this).css("background-color", "#cecece");
+		            	$(this).css("background-color", "#92FF36");
 
 		            	pontos = pontos + 1;
+		            }else{
+		            	erros = erros + 1;
+		            	$(this).css("background-color", "#FA0C00");
 		            }
 
-		            console.log(pontos)
+		            setPontos();
+		            setErros();
 
 		        }
 		    })
+
+		    setPontos();
+		    setErros();
 
 		});
 	</script>
