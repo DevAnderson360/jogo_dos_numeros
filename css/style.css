@@ -58,17 +58,22 @@ html, body {
 
 }
 
-.blockChild, .blockChildn div{
+.blockChild div{
 	font-size: 1.4rem;
+	font-family: 'Poppins', sans-serif;
+}
+
+.blockChildn div{
+	font-size: 1rem;
 	font-family: 'Poppins', sans-serif;
 }
 
 .blockChildn{
 	display: inline-block;
 	width: 5vw;
-	height: 10vh;
-	margin: 10px;
-	padding: 5px;
+	height: 12vh;
+	margin: 12px;
+	padding: 10px;
 
 	/*border: 1px solid var(--color-border-container);*/
 	border-radius: 5px;
