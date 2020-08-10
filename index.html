@@ -38,10 +38,10 @@
 			display: inline-block;
 			margin: 10px;
 			padding: 5px;
-			
+			border-radius: 5px;
 			align-items: center;
 			justify-content: center;
-
+			
 			max-width: 500px;
 
 			background: #A5B8A8;
@@ -73,19 +73,19 @@
 		}
 
 		.blockChild, .blockChildn div{
-			font-size: 1.6rem;
+			font-size: 1.4rem;
 			font-family: 'Poppins', sans-serif;
 		}
 
 		.blockChildn{
 			display: inline-block;
-			width: 8vw;
+			width: 5vw;
 			height: 10vh;
 			margin: 10px;
 			padding: 5px;
 
 			/*border: 1px solid var(--color-border-container);*/
-			border-radius: 2px;
+			border-radius: 5px;
 
 			background: var(--color-card-body);
 
@@ -104,114 +104,11 @@
 <body>
 	<div class="container">
 		<div id="painel" style="display: inline;">
-			<div>Total pontos: <strong id="tp">1</strong> </div>
-			<div>Erros: <strong id="err">5</strong></div>
+			<div>Total pontos: <strong id="tp">0</strong> </div>
+			<div>Erros: <strong id="err">0</strong></div>
 		</div>
-		<div class="blockF">
-			<div class="blockChild" key="0">
-				<div class="container">
-					0
-				</div>
-			</div>
-			<div class="blockChild" key="1">
-				<div class="container">
-					1
-				</div>
-			</div>
-			<div class="blockChild" key="2">
-				<div class="container">
-					2
-				</div>
-			</div>
-			<div class="blockChild" key="3">
-				<div class="container">
-					3
-				</div>
-			</div>
-			<div class="blockChild" key="4">
-				<div class="container">
-					4
-				</div>
-			</div>
-			<div class="blockChild" key="5">
-				<div class="container">
-					5
-				</div>
-			</div>
-			<div class="blockChild" key="6">
-				<div class="container">
-					6
-				</div>
-			</div>
-			<div class="blockChild" key="7">
-				<div class="container">
-					7
-				</div>
-			</div>
-			<div class="blockChild" key="8">
-				<div class="container">
-					8
-				</div>
-			</div>
-			<div class="blockChild" key="9">
-				<div class="container">
-					9
-				</div>
-			</div>
-		</div>
-
-		<div class="blockF">
-			<div class="blockChildn" key="0">
-				<div class="container">
-					Zero
-				</div>
-			</div>
-			<div class="blockChildn" key="1">
-				<div class="container">
-					Um
-				</div>
-			</div>
-			<div class="blockChildn" key="2">
-				<div class="container">
-					Dois
-				</div>
-			</div>
-			<div class="blockChildn" key="3">
-				<div class="container">
-					Três
-				</div>
-			</div>
-			<div class="blockChildn" key="4">
-				<div class="container">
-					Quatro
-				</div>
-			</div>
-			<div class="blockChildn" key="5">
-				<div class="container">
-					Cinco
-				</div>
-			</div>
-			<div class="blockChildn" key="6">
-				<div class="container">
-					Seis
-				</div>
-			</div>
-			<div class="blockChildn" key="7">
-				<div class="container">
-					Sete
-				</div>
-			</div>
-			<div class="blockChildn" key="8">
-				<div class="container">
-					Oito
-				</div>
-			</div>
-			<div class="blockChildn" key="9">
-				<div class="container">
-					Nove
-				</div>
-			</div>
-		</div>	
+		<div class="blockF" id="numbers"></div>
+		<div class="blockF" id="numerals"></div>	
 	</div>
 	<!--footer-->
 	<script src="node_modules/jquery/dist/jquery.min.js"></script>
@@ -219,14 +116,66 @@
 	<!--script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script-->
 
 	<script>
+		//embaralhar array
+		Array.prototype.shuffle = function() {
+
+		    let indice = this.length;
+		    
+		    while(indice) {
+
+		        const indiceAleatorio = Math.floor(Math.random() * indice--);
+		        [this[indice], this[indiceAleatorio]] = 
+		            [this[indiceAleatorio], this[indice]];
+		    }
+
+		    return this;
+		}
+
 		$(document).ready(function(){
 
 			let pontos = 0;
 			let erros  = 0;
 
-			$('.blockChild').draggable({
-				helper: 'clone'
-			});
+			function setDraggable(select){
+				$(select).draggable({
+					helper: 'clone'
+				});
+			}
+
+			function setDroppable(select){
+				$(select).droppable({
+			        //hoverClass: 'lixeira-ativa',
+			        drop: function(e, ui) {
+
+			            let this_num = $(this).attr('key');
+
+			            let   ui_num = $(ui)[0].draggable.attr('key')
+
+			            let msg = "Acertou"; 
+
+			            let status = this_num === ui_num ? true: false;
+
+			            if(!status)
+			            	msg = "Errou"
+			            
+			            console.log(msg)
+
+			            if(status){
+			            	$(this).droppable( "option", "disabled", true );
+			            	$(this).css("background-color", "#92FF36");
+
+			            	pontos = pontos + 1;
+			            }else{
+			            	erros = erros + 1;
+			            	$(this).css("background-color", "#FA0C00");
+			            }
+
+			            setPontos();
+			            setErros();
+
+			        }
+			    });
+			}
 
 			function setPontos()
 			{
@@ -238,42 +187,52 @@
 				$("#err").text(erros);
 			}
 
-			// Lixeira
-		    $('.blockChildn').droppable({
-		        //hoverClass: 'lixeira-ativa',
-		        drop: function(e, ui) {
+		    //-----
+		    var numbers = ["Zero", "Um", "Dois", "Três", "Quatro", "Cinco", "Seis", "Sete", "Oito", "Nove", "Dez", "Onze", "Doze", "Treze", "Quatorze", "Quinze"];
+		    
+		    //setar numeros
+		    function set(amount){
+		    	let totalNumbers = numbers.length;
+		    	
+		    	var num = [];
 
-		            let this_num = $(this).attr('key');
+		    	var new_array = [];
+		    	
+		    	for(var i = 0 ; i < totalNumbers; i++)
+		    		num.push(i)
 
-		            let   ui_num = $(ui)[0].draggable.attr('key')
+		    	num.shuffle();
 
-		            let msg = "Acertou"; 
+		    	for(var i = 0 ; i < amount; i++)
+		    		new_array.push(num[i])
 
-		            let status = this_num === ui_num ? true: false;
+		    	return new_array;
+		    	
+		    }
 
-		            if(!status)
-		            	msg = "Errou"
-		            
-		            console.log(msg)
+		    function renderNumber(n){
+		    	$("#numbers").append(`<div class="blockChild" key="${n}" id="${n}"><div class="container">${n}</div></div>`)
+		    	setDraggable(`#${n}`)
+		    }
 
-		            if(status){
-		            	$(this).droppable( "option", "disabled", true );
-		            	$(this).css("background-color", "#92FF36");
+		    function renderNumerals(nums){
+		    	nums.map(function(n){
+			    	$("#numerals").append(`<div class="blockChildn" key="${n}" id="${numbers[n]}"><div class="container">${numbers[n]}</div></div>`)
+		    		
+		    		setDroppable(`#${numbers[n]}`)
 
-		            	pontos = pontos + 1;
-		            }else{
-		            	erros = erros + 1;
-		            	$(this).css("background-color", "#FA0C00");
-		            }
+			    });
+		    }
 
-		            setPontos();
-		            setErros();
+		    function render(num){
+		    	let nums = set(num);
+		    	nums.map(function(n){
+		    		renderNumber(n)
+		    	});
+		    	renderNumerals(nums.shuffle())
+		    }
 
-		        }
-		    })
-
-		    setPontos();
-		    setErros();
+		    render(15);
 
 		});
 	</script>
